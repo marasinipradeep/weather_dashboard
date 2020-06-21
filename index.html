@@ -13,20 +13,21 @@
 </head>
 
 <body>
-  <header class="container-fluid text-center text-white bg-dark p-2">
+  <header class="text-center text-white bg-dark p-2">
     <h1>Weather Dashboard</h1>
   </header>
 
   <div class="container-fluid">
     <div class="row">
+      
       <aside class="col-lg-3 bg-light">
         <h5 class="mt-1">Search for a City:</h5>
         <div class="form-inline form-group">
-          <input class="form-control" type="text" id="search-value" />
+          <input class="form-control" type="text" id="search-city" />
           <button class="btn btn-primary" id="search-button"> <i class="fa fa-search"></i> </button>
         </div>
 
-        <ul class="list-group history"></ul>
+        <ul class="list-group search-history"></ul>
       </aside>
 
       <div class="col-lg-9">
