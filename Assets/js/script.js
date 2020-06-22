@@ -6,10 +6,10 @@ var forcastEl = $("#forecast")
 var getStoredSearchedHistory = JSON.parse(localStorage.getItem("searchedHistory"))
 
 //36e0a25f774c30702ff855cbef613566
-// url: "http://api.openweathermap.org/data/2.5/weather?q=" + searchValue + "&appid=36e0a25f774c30702ff855cbef613566&units=imperial"
-//url: "http://api.openweathermap.org/data/2.5/forecast?q=" + searchValue + "&appid=36e0a25f774c30702ff855cbef613566&units=imperial",
+// url: "https://api.openweathermap.org/data/2.5/weather?q=" + searchValue + "&appid=36e0a25f774c30702ff855cbef613566&units=imperial"
+//url: "https://api.openweathermap.org/data/2.5/forecast?q=" + searchValue + "&appid=36e0a25f774c30702ff855cbef613566&units=imperial",
 //uvIndex
-//url: "http://api.openweathermap.org/data/2.5/uvi?appid=7ba67ac190f85fdba2e2dc6b9d32e93c&lat=" + lat + "&lon=" + lon,
+//url: "https://api.openweathermap.org/data/2.5/uvi?appid=7ba67ac190f85fdba2e2dc6b9d32e93c&lat=" + lat + "&lon=" + lon,
 
 var searchedHistory = {
     lastcityName: []
@@ -70,7 +70,7 @@ function getTodayForecast(cityName) {
     forcastEl.empty()
     $.ajax({
 
-        url: "http://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=36e0a25f774c30702ff855cbef613566&units=imperial",
+        url: "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=36e0a25f774c30702ff855cbef613566&units=imperial",
         method: "GET"
     }).then(function (response) {
         console.log(response)
@@ -80,7 +80,7 @@ function getTodayForecast(cityName) {
         // var newDate = new Date(todaydate)
         // console.log("new date is : " + newDate)
         // var icon = response.weather[0].icon;
-        var icon = ("<img src='http://openweathermap.org/img/w/" + response.weather[0].icon + ".png'>")
+        var icon = ("<img src='https://openweathermap.org/img/w/" + response.weather[0].icon + ".png'>")
 
         var temp = response.main.temp
         var humid = response.main.humidity
@@ -116,7 +116,7 @@ function getUvIndex(lat, lon) {
 
     console.log("the value of lat is : " + lat + "and value of lon is :" + lon)
     $.ajax({
-        url: "http://api.openweathermap.org/data/2.5/uvi?appid=36e0a25f774c30702ff855cbef613566&lat=" + lat + "&lon=" + lon,
+        url: "https://api.openweathermap.org/data/2.5/uvi?appid=36e0a25f774c30702ff855cbef613566&lat=" + lat + "&lon=" + lon,
         method: "GET"
     }).then(function (response) {
         console.log(response.value)
@@ -130,7 +130,7 @@ function fiveDaysForecast(searchValue) {
     forcastEl.empty()
 
     $.ajax({
-        url: "http://api.openweathermap.org/data/2.5/forecast?q=" + searchValue + "&appid=36e0a25f774c30702ff855cbef613566&units=imperial&cnt=5",
+        url: "https://api.openweathermap.org/data/2.5/forecast?q=" + searchValue + "&appid=36e0a25f774c30702ff855cbef613566&units=imperial&cnt=5",
         method: "GET"
 
     }).then(function (response) {
@@ -141,7 +141,7 @@ function fiveDaysForecast(searchValue) {
             var temperaute = response.list[i].main.temp
             var humidity = response.list[i].main.humidity
             // var icon = response.list[0].weather[0].icon
-            var icon = ("<img src='http://openweathermap.org/img/w/" + response.list[0].weather[0].icon + ".png'>")
+            var icon = ("<img src='https://openweathermap.org/img/w/" + response.list[0].weather[0].icon + ".png'>")
 
             var newForcastDiv = $("<div>").addClass("column  mt-3")
             var newUl = $("<ul>").addClass("card list-group list-group-flush")
