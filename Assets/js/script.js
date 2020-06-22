@@ -35,11 +35,20 @@ function init() {
 }
 
 
+
+function onSearchedHistoryButtonClicked(){
+    console.log("searched button clicked")
+    var cityName = $(this).data("cityName");
+    console.log(cityName)
+    getTodayForecast(cityName);
+    fiveDaysForecast(cityName)
+}
+
 function displayLastSearched() {
     historyEL.empty();
     $.each(searchedHistory.lastcityName, function (index, cityName) {
         console.log(cityName)
-        var newHistoryLi = $("<button>").text(cityName).addClass("mt-3");
+        var newHistoryLi = $("<button>").text(cityName).addClass("mt-3 historyButton").data("cityName",cityName);
         historyEL.prepend(newHistoryLi);
     })
 }
@@ -58,7 +67,6 @@ function onSearchButtonClicked() {
         searchedHistory.lastcityName.push(cityName)
         console.log(cityName)
         storeSearchedHistory();
-        
         getTodayForecast(cityName);
         fiveDaysForecast(cityName)
     }
@@ -74,10 +82,12 @@ function getTodayForecast(cityName) {
         method: "GET"
     }).then(function (response) {
         console.log(response)
-        // getUvIndex(response.coord.lat, response.coord.lon);
+        
         var name = response.name
         var todaydate = response.dt;
-        // var newDate = new Date(todaydate)
+
+      
+         var newDate =   new Date().toLocaleDateString()
         // console.log("new date is : " + newDate)
         // var icon = response.weather[0].icon;
         var icon = ("<img src='https://openweathermap.org/img/w/" + response.weather[0].icon + ".png'>")
@@ -91,22 +101,26 @@ function getTodayForecast(cityName) {
 
         var divHoldingNameDateAndIcon = $("<div>").addClass("row panel-heading")
 
-        var nameRow = $("<h4>").addClass("display-4")
-        nameRow.html(name + " (" + todaydate + ")" + icon)
+        var nameRow = $("<h5>").addClass("display-4")
+        nameRow.html(name + " (" + newDate + ")" + icon)
 
         divHoldingNameDateAndIcon.append(nameRow)
 
-        var tempRow = $("<h5>").addClass("display-6")
-        tempRow.text("Temperature : " + temp)
+        var tempRow = $("<p>").addClass("display-6")
+        tempRow.text("Temperature : " + temp +" °F")
 
-        var humidRow = $("<h5>").addClass("display-6")
-        humidRow.text("Humidity : " + humid)
+        var humidRow = $("<p>").addClass("display-6")
+        humidRow.text("Humidity : " + humid +" %")
 
-        var windSpeedRow = $("<h5>").addClass("display-6")
-        windSpeedRow.text("Wind Speed : " + windSpeed)
+        var windSpeedRow = $("<p>").addClass("display-6 windSpeed")
+        windSpeedRow.text("Wind Speed : " + windSpeed +" MPH")
 
         newDiv.append(divHoldingNameDateAndIcon, tempRow, humidRow, windSpeedRow)
         todayEl.append(newDiv)
+
+         getUvIndex(response.coord.lat, response.coord.lon);
+
+
     })
 
 
@@ -120,6 +134,22 @@ function getUvIndex(lat, lon) {
         method: "GET"
     }).then(function (response) {
         console.log(response.value)
+
+        var uvIndex = $("<p>").text("UV Index: ");
+        var UVButton = $("<span>").addClass("btn btn-sm").text(response.value);
+        
+        
+        if (response.value < 3) {
+            UVButton.addClass("btn-success");
+        }
+        else if (response.value < 7) {
+            UVButton.addClass("btn-warning");
+        }
+        else {
+            UVButton.addClass("btn-danger");
+        }
+        
+        $("#today .windSpeed").append(uvIndex.append(UVButton));
     })
 }
 
@@ -135,45 +165,41 @@ function fiveDaysForecast(searchValue) {
 
     }).then(function (response) {
 
-        // console.log("fivedays forecast is : " +JSON.stringify(response))
+         console.log("fivedays forecast is : " +JSON.stringify(response))
+         $("#forecast").html("<h2>5- day Forecast</h2>").append("<div class=\"row\">")
         for (i = 0; i < 5; i++) {
-            var forcast_date = response.list[i].dt
+            var forcast_date = response.list[i].dt_txt
+            // var fomattedForcastDate =new Date(forcast_date).toLocaleDateString()
             var temperaute = response.list[i].main.temp
             var humidity = response.list[i].main.humidity
             // var icon = response.list[0].weather[0].icon
             var icon = ("<img src='https://openweathermap.org/img/w/" + response.list[0].weather[0].icon + ".png'>")
 
-            var newForcastDiv = $("<div>").addClass("column  mt-3")
-            var newUl = $("<ul>").addClass("card list-group list-group-flush")
+            var col = $("<div>").addClass("col-md-2")
+            var card =$("<div>").addClass("card bg-primary text-white mt-3")
+            var body = $("<div>").addClass("card-body p-2")
 
             //Forecast date
-            var newDate = $("<li>").addClass("list-group-item")
-            newDate.text("Date : " + forcast_date)
+            var newDate = $("<h5>").addClass("card-title").text(new Date (forcast_date).toLocaleDateString())
+
+
+            //Forecast icon
+            var newIcon = $("<p>").html(icon)
 
             //Forecast temperature
-            var newTemerature = $("<li>").addClass("list-group-item")
-            newTemerature.text("Temperature : " + temperaute)
+            var newTemerature = $("<p>").addClass("card-text").text("Temp : " + temperaute + " °F")
 
 
             //Forecast humidity
-            var newHumidity = $("<li>").addClass("list-group-item")
-            newHumidity.text("Humidity : " + humidity)
+            var newHumidity = $("<p>").addClass("card-text").text("Humidity : " + humidity +" %")
 
-            //Forecast icon
-            var newIcon = $("<li>").addClass("list-group-item")
-            newIcon.html(icon)
 
-            newUl.append(newDate, newIcon, newTemerature, newHumidity)
-            newForcastDiv.append(newUl)
-            forcastEl.append(newForcastDiv)
-
-            //         <div class="card" style="width: 18rem;">
-            //   <ul class="list-group list-group-flush">
-            //     <li class="list-group-item">Cras justo odio</li>
-            //     <li class="list-group-item">Dapibus ac facilisis in</li>
-            //     <li class="list-group-item">Vestibulum at eros</li>
-            //   </ul>
-            // </div>
+            body.append(newDate, newIcon, newTemerature, newHumidity)
+            card.append(body)
+            col.append(card)
+           // newForcastDiv.append(col)
+           
+            $("#forecast .row").append(col)
         }
     })
 
@@ -183,6 +209,9 @@ function storeSearchedHistory() {
     localStorage.setItem("searchedHistory", JSON.stringify(searchedHistory))
     init();
 }
+
+
+$("button.historyButton").on("click", onSearchedHistoryButtonClicked)
 //current weather
 
 //name:response.name
