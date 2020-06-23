@@ -12,6 +12,8 @@
 </head>
 
 <body>
+
+  <!-- Heading of Weather dashboard -->
   <header class="bg-dark text-white text-center p-3">
     <h1>Weather Dashboard</h1>
   </header>
@@ -20,12 +22,16 @@
     <div class="row">
       <div class="col-lg-3 bg-light panel panel-primary">
         <h5 class="mt-1">Search for a City:</h5>
+
+        <!-- Forms to get input value from users -->
         <div class="form-inline form-group">
           <input class="form-control " type="text" id="search-city" />
           <button class="btn btn-primary btn-md ml-2 mt-2" id="search-button"> <i class="fa fa-search"></i> </button>
         </div>
         <ul class="list-group search-history"></ul>
       </div>
+
+      <!-- All the weather forcast will appear inside here -->
       <div class="col-lg-9">
         <div id="today"></div>
         <div id="forecast">
@@ -35,8 +41,6 @@
   </div>
   </div>
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
   <script src="./Assets/js/script.js"></script>
 </body>
-
 </html>
