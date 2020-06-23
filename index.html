@@ -6,14 +6,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
- 
-  <link rel="stylesheet" href="https://code.jquery.com/ui/1.8.10/themes/smoothness/jquery-ui.css" type="text/css">
-  <script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.10/jquery-ui.min.js"></script>
+
+
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="./Assets/css/style.css">
 
-  
+
   <title>Weather Dashboard</title>
 </head>
 
@@ -24,30 +23,25 @@
 
   <div class="container-fluid">
     <div class="row">
-      
+
       <aside class="col-lg-3 bg-light panel panel-primary">
         <h5 class="mt-1 panel-heading">Search for a City:</h5>
         <div class="form-inline form-group">
           <input class="form-control" type="text" id="search-city" />
           <button class="btn btn-primary" id="search-button"> <i class="fa fa-search"></i> </button>
         </div>
-
         <ul class="list-group search-history"></ul>
       </aside>
 
       <div class="col-lg-9">
-        <div id="today" class="jumbotron jumbotron-fluid mt-3"></div>
+        <div id="today"></div>
         <div id="forecast">
-          
-          </div>
         </div>
       </div>
     </div>
   </div>
+  </div>
 
-  
-  
-  
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
   <script src="./Assets/js/script.js"></script>
