@@ -112,9 +112,8 @@ function fiveDaysForecast(searchValue) {
         $("#forecast").html("<h3> 5- day Forecast</h3>").append("<div class=\"row\">")
 
         for (var i = 0; i < response.list.length; i++) {
-
             if (response.list[i].dt_txt.indexOf("00:00:00") !== -1) {
-            var icon = ("<img src='https://openweathermap.org/img/w/" + response.list[0].weather[0].icon + ".png'>")
+            var icon = ("<img src='https://openweathermap.org/img/w/" + response.list[i].weather[0].icon + ".png'>")
 
             var col = $("<div>").addClass("col-md")
             var card = $("<div>").addClass("card bg-primary text-white mt-3")
