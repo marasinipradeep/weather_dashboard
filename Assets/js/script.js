@@ -27,7 +27,6 @@ function onSearchedHistoryButtonClicked() {
 function displayLastSearched() {
     $(".search-history").empty();
     $.each(searchedHistory.lastcityName, function (index, cityName) {
-        console.log(cityName)
         var newHistoryLi = $("<li>").text(cityName).addClass("list-group-item list-group-item-action historyButton").data("cityName", cityName).css("cursor", "pointer");
         $(".search-history").prepend(newHistoryLi);
     })
@@ -46,7 +45,6 @@ function onSearchButtonClicked() {
         $("#search-city").val("")
         searchedHistory.lastcityName.push(cityName)
         displayLastSearched();
-        console.log(cityName)
         storeSearchedHistory();
         getTodayForecast(cityName);
         fiveDaysForecast(cityName)
@@ -59,7 +57,6 @@ function getTodayForecast(cityName, err) {
         url: "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=36e0a25f774c30702ff855cbef613566&units=imperial",
         method: "GET"
     }).then(function (response) {
-        console.log(response)
         $("#today").empty()
         //adding an element to appear on UI after getting response
         var icon = ("<img src='https://openweathermap.org/img/w/" + response.weather[0].icon + ".png'>")
