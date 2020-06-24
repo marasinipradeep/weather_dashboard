@@ -41,6 +41,7 @@ function onSearchButtonClicked() {
     if (cityName === "") {
         alert("Enter valid Input")
     }
+    
     else {
         $("#search-city").val("")
         searchedHistory.lastcityName.push(cityName)
@@ -49,8 +50,6 @@ function onSearchButtonClicked() {
         storeSearchedHistory();
         getTodayForecast(cityName);
         fiveDaysForecast(cityName)
-
-
     }
 }
 
