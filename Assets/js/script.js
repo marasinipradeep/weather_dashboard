@@ -113,6 +113,8 @@ function fiveDaysForecast(searchValue) {
                 var newDate = $("<h5>").addClass("card-title").text(new Date(response.list[i].dt_txt).toLocaleDateString())
                 //Forecast icon
                 var newIcon = $("<p>").html(icon)
+                //description
+                var description = $("<p>").text(response.list[i].weather[0].description)
                 //Forecast temperature
                 var newTemerature = $("<p>").addClass("card-text").text("Temp : " + parseInt(response.list[i].main.temp - 32) + " °C")
 
@@ -123,7 +125,7 @@ function fiveDaysForecast(searchValue) {
                 var newMaxTemerature = $("<p>").addClass("card-text").text("Max Temp : " + parseInt(response.list[i].main.temp_max - 32) + " °C")
                 //Forecast humidity
                 var newHumidity = $("<p>").addClass("card-text").text("Humidity : " + response.list[i].main.humidity + " %")
-                $("#forecast .row").append(newCol.append(newCard.append(cardBody.append(newDate, newIcon, newTemerature,windSpeed,newMaxTemerature, newHumidity))))
+                $("#forecast .row").append(newCol.append(newCard.append(cardBody.append(newDate, newIcon, description, newTemerature,windSpeed,newMaxTemerature, newHumidity))))
             }
         }
     })
