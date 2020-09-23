@@ -52,7 +52,7 @@ function onSearchButtonClicked(event) {
 }
 
 //Calling an API for today weather forecast 
-function getTodayForecast(cityName, err) {
+function getTodayForecast(cityName) {
     $.ajax({
         url: "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=36e0a25f774c30702ff855cbef613566&units=imperial",
         method: "GET"
@@ -60,7 +60,7 @@ function getTodayForecast(cityName, err) {
         $("#today").empty()
         //adding an element to appear on UI after getting response
         var icon = ("<img src='https://openweathermap.org/img/w/" + response.weather[0].icon + ".png'>")
-        var newDiv = $("<div>").addClass("card bg-default  mt-3")
+        var newDiv = $("<div>").addClass("card bg-secondary  mt-3")
         var panelHeading = $("<div>").addClass("card-body p-2")
         var nameDateIcon = $("<h3>").html(response.name + " (" + new Date().toLocaleDateString() + ")" + icon).addClass("card-title")
         var tempRow = $("<p>").text("Temperature : " + parseInt(response.main.temp -32)+ " °C").addClass("card-text")
