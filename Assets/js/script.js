@@ -34,7 +34,7 @@ function displayLastSearched() {
 
 
 //when search button is clicked
-function onSearchButtonClicked() {
+function onSearchButtonClicked(event) {
     event.preventDefault()
     var cityName = $("#search-city").val();
     if (cityName === "") {
