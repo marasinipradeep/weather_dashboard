@@ -63,7 +63,7 @@ function getTodayForecast(cityName, err) {
         var newDiv = $("<div>").addClass("card bg-default  mt-3")
         var panelHeading = $("<div>").addClass("card-body p-2")
         var nameDateIcon = $("<h3>").html(response.name + " (" + new Date().toLocaleDateString() + ")" + icon).addClass("card-title")
-        var tempRow = $("<p>").text("Temperature : " + response.main.temp + " °F").addClass("card-text")
+        var tempRow = $("<p>").text("Temperature : " + parseInt(response.main.temp -32)+ " °C").addClass("card-text")
         var humidRow = $("<p>").text("Humidity : " + response.main.humidity + " %").addClass("card-text")
         var windSpeedRow = $("<p>").text("Wind Speed : " + response.wind.speed + " MPH").addClass("card-text")
         var UV = $("<p>").addClass("card-text UV")
