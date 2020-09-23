@@ -113,7 +113,7 @@ function fiveDaysForecast(searchValue) {
                 //Forecast icon
                 var newIcon = $("<p>").html(icon)
                 //Forecast temperature
-                var newTemerature = $("<p>").addClass("card-text").text("Temp : " + response.list[i].main.temp + " °F")
+                var newTemerature = $("<p>").addClass("card-text").text("Temp : " + parseInt(response.list[i].main.temp - 32) + " °C")
                 //Forecast humidity
                 var newHumidity = $("<p>").addClass("card-text").text("Humidity : " + response.list[i].main.humidity + " %")
                 $("#forecast .row").append(newCol.append(newCard.append(cardBody.append(newDate, newIcon, newTemerature, newHumidity))))
