@@ -116,11 +116,14 @@ function fiveDaysForecast(searchValue) {
                 //Forecast temperature
                 var newTemerature = $("<p>").addClass("card-text").text("Temp : " + parseInt(response.list[i].main.temp - 32) + " °C")
 
+                 //Minimum Temperature
+                 var windSpeed = $("<p>").addClass("card-text").text("Wind Speed : " + response.list[i].wind.speed)
+
                 //Maximum Temperature
                 var newMaxTemerature = $("<p>").addClass("card-text").text("Max Temp : " + parseInt(response.list[i].main.temp_max - 32) + " °C")
                 //Forecast humidity
                 var newHumidity = $("<p>").addClass("card-text").text("Humidity : " + response.list[i].main.humidity + " %")
-                $("#forecast .row").append(newCol.append(newCard.append(cardBody.append(newDate, newIcon, newTemerature,newMaxTemerature, newHumidity))))
+                $("#forecast .row").append(newCol.append(newCard.append(cardBody.append(newDate, newIcon, newTemerature,windSpeed,newMaxTemerature, newHumidity))))
             }
         }
     })
