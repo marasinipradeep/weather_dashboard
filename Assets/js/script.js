@@ -100,6 +100,7 @@ function fiveDaysForecast(searchValue) {
         method: "GET"
 
     }).then(function (response) {
+        console.log(response)
         $("#forecast").html("<h3> 5- day Forecast</h3>").append("<div class=\"row\">")
         for (var i = 0; i < response.list.length; i++) {
             //Only rendering the results if time is eqals to next day
@@ -114,9 +115,12 @@ function fiveDaysForecast(searchValue) {
                 var newIcon = $("<p>").html(icon)
                 //Forecast temperature
                 var newTemerature = $("<p>").addClass("card-text").text("Temp : " + parseInt(response.list[i].main.temp - 32) + " °C")
+
+                //Maximum Temperature
+                var newMaxTemerature = $("<p>").addClass("card-text").text("Max Temp : " + parseInt(response.list[i].main.temp_max - 32) + " °C")
                 //Forecast humidity
                 var newHumidity = $("<p>").addClass("card-text").text("Humidity : " + response.list[i].main.humidity + " %")
-                $("#forecast .row").append(newCol.append(newCard.append(cardBody.append(newDate, newIcon, newTemerature, newHumidity))))
+                $("#forecast .row").append(newCol.append(newCard.append(cardBody.append(newDate, newIcon, newTemerature,newMaxTemerature, newHumidity))))
             }
         }
     })
